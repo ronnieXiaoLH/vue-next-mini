@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../../dist/vue.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script>
+      const { reactive, effect, computed } = Vue
+
+      const obj = reactive({
+        name: '张三'
+      })
+
+      // debugger
+      // computed 的构造函数中，会实例化一个 ReactiveEffect
+      const computedObjName = computed(() => '名字：' + obj.name)
+
+      console.log(computedObjName)
+
+      /**
+       * effect 执行的时候，会实例化一个 ReactiveEffect，还会调用传入的函数，所以这里会访问 computedObjName.value ：
+       *   1. 会给 computed 返回的对象的 dep 赋值为 effect 执行时实例化的 ReactiveEffect
+       *   2. computed 方法传入的函数，访问了 obj.name ，收集到的依赖（targetMap）是 key 是 obj，value 是 Map；Map 的 key 是 name，value 是 computed 实例化的 ReactiveEffect
+       */
+      effect(() => {
+        document.querySelector('#app').innerText = computedObjName.value
+        document.querySelector('#app').innerText = computedObjName.value
+      })
+
+      /**
+       * 给 obj.name 赋值，会执行 name 属性收集到的 dep 依赖：
+       *  1. 执行 computed 的 ReactiveEffect 的 scheduler 方法
+       *  2. 执行 effect 的 ReactiveEffect 的 run 方法
+       */
+      setTimeout(() => {
+        obj.name = '李四'
+      }, 2000)
+    </script>
+  </body>
+</html>

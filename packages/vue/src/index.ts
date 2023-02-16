@@ -1,0 +1,6 @@
+export { reactive, effect, ref, computed } from '@vue/reactivitty'
+export { queuePreFlushCb, watch, h } from '@vue/runtime-core'
+export { Fragment, Text, Comment, createElementVNode } from '@vue/runtime-core'
+export { render, createApp } from '@vue/runtime-dom'
+export { compile } from '@vue/vue-compat'
+export { toDisplayString } from '@vue/shared'

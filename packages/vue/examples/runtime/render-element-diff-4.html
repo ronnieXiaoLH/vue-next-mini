@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../../dist/vue.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script>
+      const { h, render } = Vue
+      const vnode = h('ul', [
+        h(
+          'li',
+          {
+            key: 1
+          },
+          'a'
+        ),
+        h(
+          'li',
+          {
+            key: 2
+          },
+          'b'
+        ),
+        h(
+          'li',
+          {
+            key: 3
+          },
+          'c'
+        )
+      ])
+      console.log(vnode)
+      render(vnode, app)
+
+      setTimeout(() => {
+        const vnode2 = h('ul', [
+          // h(
+          //   'li',
+          //   {
+          //     key: 1
+          //   },
+          //   'a'
+          // ),
+          h(
+            'li',
+            {
+              key: 2
+            },
+            'b'
+          ),
+          h(
+            'li',
+            {
+              key: 3
+            },
+            'c'
+          )
+        ])
+        render(vnode2, app)
+      }, 2000)
+    </script>
+  </body>
+</html>

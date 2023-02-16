@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../../dist/vue.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script>
+      const { h, render, Fragment } = Vue
+      const vnode = h(Fragment, 'hello vue')
+      render(vnode, app)
+
+      const vnode2 = h(Fragment, 'hello world')
+      setTimeout(() => {
+        render(vnode2, app)
+      }, 2000)
+    </script>
+  </body>
+</html>

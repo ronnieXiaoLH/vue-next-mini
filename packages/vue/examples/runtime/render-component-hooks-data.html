@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../../dist/vue.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script>
+      const { h, render } = Vue
+      const component = {
+        data() {
+          return {
+            msg: 'hello component'
+          }
+        },
+        render() {
+          return h('div', this.msg)
+        },
+        created() {
+          console.log('created', this.msg)
+        },
+        mounted() {
+          console.log('mounted', this.msg)
+          // setTimeout(() => {
+          //   this.msg = 'update component'
+          // }, 2000)
+        }
+      }
+      const vnode = h(component)
+      render(vnode, app)
+    </script>
+  </body>
+</html>
